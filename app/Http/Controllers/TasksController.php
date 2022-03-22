@@ -97,7 +97,7 @@ class TasksController extends Controller
         $task->content = $request->content;
         $task->save();
 
-         return redirect('/');s
+         return redirect('/');
     }
 
     /**
@@ -108,7 +108,7 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        $Task =Task::findOrFail($id);
+        $task =Task::findOrFail($id);
         $task->delete();
         
         return redirect('/');
