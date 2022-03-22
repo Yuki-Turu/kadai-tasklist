@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\task;
+use App\Task;
 
 class TasksController extends Controller
 {
@@ -15,7 +15,7 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks= task::all();
+        $tasks= Task::all();
         
         return view('tasks.index',[
             'tasks'=>$tasks,
@@ -29,7 +29,7 @@ class TasksController extends Controller
      */
     public function create()
     {
-        $task =new task;
+        $task =new Task;
         
         return view('tasks.create',[
             'task' =>$task,
@@ -44,7 +44,7 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $task=new task;
+        $task=new Task;
         $task->content=$request->content;
         $task->save();
         
@@ -59,7 +59,7 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $task =task::findOrFail($id);
+        $task =Task::findOrFail($id);
         
         return view('tasks.show',[
             'task'=>$task,
@@ -74,7 +74,7 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $task = task::findOrFail($id);
+        $task = Task::findOrFail($id);
         return view('tasks.edit', [
             'task' => $task,
         ]);
@@ -89,22 +89,22 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = task::findOrFail($id);
+        $task = Task::findOrFail($id);
         $task->content = $request->content;
         $task->save();
 
-         return redirect('/');
+         return redirect('/');s
     }
 
     /**
      * Remove the specified resource from storage.
-     *
+     
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $task =task::findOrFail($id);
+        $Task =Task::findOrFail($id);
         $task->delete();
         
         return redirect('/');
