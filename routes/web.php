@@ -10,6 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'TasksController@index');
+Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
 
-Route::resource('tasks', 'TasksController');
+Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
