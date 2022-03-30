@@ -24,4 +24,5 @@ Route::resource('tasks', 'TasksController');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+     Route::resource('tasks', 'TasksController', ['only' => ['store', 'destroy']]);
 });

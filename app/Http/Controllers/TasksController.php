@@ -19,6 +19,18 @@ class TasksController extends Controller
         return view('tasks.index',[
             'tasks'=>$tasks,
             ]);
+        $data = [];
+        if (Auth::check()){
+            $user =\Auth::user();
+            $tasks = $user->tasks()->orderBy('created_at','desc')->paginate(10);
+            
+            $data = [
+                'user'=>$user,
+                'tasks'=>$tasks,
+                ];
+        }
+        
+        return view('welcome',$data);
     }
 
     /**
@@ -48,14 +60,17 @@ class TasksController extends Controller
             'content'=>'required',
             'user_id'=>'required',
             ]);
-        
+            $request->user()->tasks()->create([
+                'content' => $request->content,
+                ]);
+                
         $task=new Task;
         $task->status=$request->status;
         $task->content=$request->content;
         $task->user_id=$request->user_id;
         $task->save();
         
-        return redirect('/');
+        return back();
     }
 
     /**
@@ -120,7 +135,12 @@ class TasksController extends Controller
     {
         $task =Task::findOrFail($id);
         $task->delete();
+        $task = App\Task::findOrfail($id);
         
-        return redirect('/');
+        if(\Auth::id() === $task->user_id) {
+            $task->delete();
+        }
+        
+        return back();
     }
 }
