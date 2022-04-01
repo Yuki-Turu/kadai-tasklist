@@ -15,10 +15,6 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks= Task::all();
-        return view('tasks.index',[
-            'tasks'=>$tasks,
-            ]);
         $data = [];
         if (\Auth::check()){
             $user =\Auth::user();
