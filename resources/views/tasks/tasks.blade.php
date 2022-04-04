@@ -13,7 +13,7 @@
                     <div>
                         @if (Auth::id() == $task->user_id)
                                 {{-- 投稿削除ボタンのフォーム --}}
-                        {!! Form::open(['route' => ['microposts.destroy', $task->id], 'method' => 'delete']) !!}
+                        {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
                             {!! Form::close() !!}
                         @endif
@@ -25,3 +25,4 @@
     {{-- ページネーションのリンク --}}
     {{ $tasks->links() }}
 @endif
+ {!! link_to_route('tasks.create', '新規タスクの投稿', [], ['class' => 'btn btn-primary']) !!}
